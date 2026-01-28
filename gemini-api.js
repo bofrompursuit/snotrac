@@ -211,9 +211,5 @@ Routes Likely to Improve:
 
 Overall Recommendation:
 Avoid travel if possible. If you must travel, use Broadway or 5th Avenue. Expect delays on all routes.`;
-}
-
-// Export for use in other scripts
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = GeminiAnalyzer;
+    }
 }

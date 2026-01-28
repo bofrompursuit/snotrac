@@ -129,5 +129,14 @@
 
     <script src="gemini-api.js"></script>
     <script src="dashboard-script.js"></script>
+    <script>
+        // Initialize dashboard with mock data immediately
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Dashboard loaded, initializing...');
+            if (typeof initDashboard === 'function') {
+                initDashboard();
+            }
+        });
+    </script>
 </body>
 </html>

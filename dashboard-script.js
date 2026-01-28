@@ -4,13 +4,31 @@ let mockData;
 
 // Initialize on page load
 async function initDashboard() {
-    geminiAnalyzer = new GeminiAnalyzer('AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE');
-    await loadMockData();
+    console.log('Initializing Dashboard...');
     
-    // Generate all initial analyses
-    await generateSnowplowAnalysis();
-    await generateSafetyInsights();
-    await generateTrafficPrediction();
+    try {
+        // Initialize Gemini Analyzer
+        if (typeof GeminiAnalyzer === 'undefined') {
+            console.error('GeminiAnalyzer class not found');
+            showMockResults();
+            return;
+        }
+        
+        geminiAnalyzer = new GeminiAnalyzer('AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE');
+        console.log('GeminiAnalyzer initialized');
+        
+        // Load mock data
+        await loadMockData();
+        console.log('Mock data loaded');
+        
+        // Generate all initial analyses
+        await generateSnowplowAnalysis();
+        await generateSafetyInsights();
+        await generateTrafficPrediction();
+    } catch (error) {
+        console.error('Dashboard initialization error:', error);
+        showMockResults();
+    }
 }
 
 // Load mock data
@@ -187,3 +205,44 @@ function updateDataSummary() {
 
 // Initialize dashboard when DOM is ready
 document.addEventListener('DOMContentLoaded', initDashboard);
+
+// Show mock results if there's an error
+function showMockResults() {
+    console.log('Displaying mock results...');
+    
+    if (typeof geminiAnalyzer === 'undefined' || !geminiAnalyzer) {
+        geminiAnalyzer = {
+            getFallbackAnalysis: () => `Analysis unavailable - Using cached insights:
+
+Based on current snow conditions in NYC:
+• Multiple snowplows active on major corridors
+• 5th Avenue and Broadway showing good progress
+• Park Avenue and Madison Ave still need clearing
+• Expect 12-15 minute transit delays
+• Recommend using recently cleared routes
+• Monitor conditions every 10 minutes`,
+            getFallbackSafetyAnalysis: () => `Overall Safety Level: CAUTION
+
+Top 3 Safety Risks:
+1. Slippery road conditions on uncleared routes
+2. Reduced visibility due to active snowfall
+3. Increased vehicle accidents due to weather
+
+High-Risk Areas to Avoid:
+• Madison Avenue (impassable - 12" snow)
+• Park Avenue (caution zone - 11" snow)`,
+            getFallbackTrafficAnalysis: () => `Next 30 Minutes Prediction: WORSENING
+
+Routes Likely to Become Congested:
+• West Side Highway (already heavy)
+• Crosstown routes
+• FDR Drive
+
+Recommendation: Use Broadway or 5th Avenue`
+        };
+    }
+    
+    document.getElementById('snowplowAnalysis').innerHTML = `<p>${geminiAnalyzer.getFallbackAnalysis()}</p>`;
+    document.getElementById('safetyAnalysis').innerHTML = `<p>${geminiAnalyzer.getFallbackSafetyAnalysis()}</p>`;
+    document.getElementById('trafficAnalysis').innerHTML = `<p>${geminiAnalyzer.getFallbackTrafficAnalysis()}</p>`;
+}
