@@ -1,0 +1,418 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0066ff;
+    --dark-bg: #0a1128;
+    --card-bg: #1a2847;
+    --text-light: #ffffff;
+    --text-muted: #a0aec0;
+    --accent-snow: #e8f4f8;
+    --danger: #ff4444;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(10, 17, 40, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    padding: 100px 20px;
+    min-height: 600px;
+}
+
+.hero-content h1 {
+    font-size: 56px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--accent-snow), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content p {
+    font-size: 20px;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+}
+
+.snow-illustration {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(232, 244, 248, 0.1), rgba(0, 102, 255, 0.1));
+    border-radius: 16px;
+    border: 2px solid rgba(0, 102, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+}
+
+.snow-illustration::before {
+    content: "❄️";
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Problem Section */
+.problem {
+    padding: 80px 20px;
+    background-color: rgba(26, 40, 71, 0.5);
+}
+
+.problem h2,
+.solution h2,
+.features h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.problem-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid var(--danger);
+    transition: all 0.3s ease;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.problem-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.problem-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.problem-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Solution Section */
+.solution {
+    padding: 80px 20px;
+}
+
+.solution-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.solution-text h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.solution-text p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.solution-list {
+    list-style: none;
+}
+
+.solution-list li {
+    font-size: 16px;
+    padding: 12px 0;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+}
+
+.solution-list li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.app-preview {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(232, 244, 248, 0.1));
+    border-radius: 16px;
+    border: 2px solid rgba(0, 102, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+}
+
+.app-preview::before {
+    content: "📱";
+}
+
+/* Features Section */
+.features {
+    padding: 80px 20px;
+    background-color: rgba(26, 40, 71, 0.5);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    border-top: 3px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 102, 255, 0.2);
+}
+
+.feature-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(232, 244, 248, 0.05));
+    border-top: 1px solid rgba(0, 102, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.cta-section h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.cta-button-large {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.cta-button-large:hover {
+    background-color: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 102, 255, 0.4);
+}
+
+.app-store-text {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+    background-color: rgba(10, 17, 40, 0.8);
+    border-top: 1px solid rgba(0, 102, 255, 0.1);
+    padding: 60px 20px 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.footer-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 102, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .solution-content {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .problem h2,
+    .solution h2,
+    .features h2,
+    .cta-section h2 {
+        font-size: 36px;
+    }
+}
