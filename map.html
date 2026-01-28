@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNOTRAC - Live Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map-style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">SNOTRAC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#map-section">Live Map</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="map-section" class="map-hero">
+        <div class="map-header">
+            <h1>Real-Time Snow Mobility Map</h1>
+            <p>Live snowplow locations, road accessibility, and route recommendations</p>
+        </div>
+    </section>
+
+    <div class="map-container">
+        <div class="map-wrapper">
+            <div id="map" class="map-canvas"></div>
+        </div>
+        
+        <div class="map-sidebar">
+            <div class="sidebar-section">
+                <h2>Map Controls</h2>
+                <button class="control-btn" id="showSnowplows">
+                    <span class="icon">❄️</span> Show Snowplows
+                </button>
+                <button class="control-btn" id="showRoads">
+                    <span class="icon">🛣️</span> Road Status
+                </button>
+                <button class="control-btn" id="showRoutes">
+                    <span class="icon">📍</span> Route Planning
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Active Snowplows</h2>
+                <div id="snowplowList" class="snowplow-list">
+                    <div class="snowplow-item">
+                        <div class="snowplow-status active"></div>
+                        <div class="snowplow-info">
+                            <p class="snowplow-name">Plow-NYC-001</p>
+                            <p class="snowplow-route">Route: 5th Ave - Central</p>
+                            <p class="snowplow-time">Updated: 2 min ago</p>
+                        </div>
+                    </div>
+                    <div class="snowplow-item">
+                        <div class="snowplow-status active"></div>
+                        <div class="snowplow-info">
+                            <p class="snowplow-name">Plow-NYC-002</p>
+                            <p class="snowplow-route">Route: Broadway - Downtown</p>
+                            <p class="snowplow-time">Updated: 1 min ago</p>
+                        </div>
+                    </div>
+                    <div class="snowplow-item">
+                        <div class="snowplow-status active"></div>
+                        <div class="snowplow-info">
+                            <p class="snowplow-name">Plow-NYC-003</p>
+                            <p class="snowplow-route">Route: Park Ave - Uptown</p>
+                            <p class="snowplow-time">Updated: 3 min ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Road Status Legend</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color cleared"></div>
+                        <span>Cleared</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color clearing"></div>
+                        <span>In Progress</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color caution"></div>
+                        <span>Caution</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="route-planner">
+        <div class="container">
+            <h2>Plan Your Route</h2>
+            <div class="planner-form">
+                <div class="form-group">
+                    <label>Starting Location</label>
+                    <input type="text" placeholder="Enter starting address" id="startLocation">
+                </div>
+                <div class="form-group">
+                    <label>Destination</label>
+                    <input type="text" placeholder="Enter destination" id="endLocation">
+                </div>
+                <div class="form-group">
+                    <label>Travel Mode</label>
+                    <select id="travelMode">
+                        <option value="DRIVING">Driving</option>
+                        <option value="TRANSIT">Public Transit (Bus)</option>
+                        <option value="WALKING">Walking</option>
+                    </select>
+                </div>
+                <button class="route-button" id="planRoute">Get Route</button>
+            </div>
+            <div id="routeResults" class="route-results" style="display: none;">
+                <h3>Recommended Route</h3>
+                <div class="route-info">
+                    <p><strong>Distance:</strong> <span id="routeDistance">3.2 miles</span></p>
+                    <p><strong>Estimated Time:</strong> <span id="routeTime">18 minutes</span></p>
+                    <p><strong>Risk Level:</strong> <span id="riskLevel" class="risk-low">Low</span></p>
+                </div>
+                <p class="route-description">This route prioritizes cleared roads and avoids areas with active snowfall.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SNOTRAC</h4>
+                    <p>Real-time snow mobility intelligence for NYC</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>info@snotrac.app</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SNOTRAC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE&libraries=places,directions"></script>
+    <script src="map-script.js"></script>
+</body>
+</html>
