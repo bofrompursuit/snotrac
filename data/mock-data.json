@@ -1,4 +1,5 @@
 {
+  "stormDate": "2026-01-25",
   "snowplows": [
     {
       "id": "PLOW-NYC-001",
@@ -6,10 +7,10 @@
       "longitude": -73.9855,
       "route": "5th Ave - Central Park",
       "status": "active",
-      "lastUpdated": "2026-01-27T14:23:00Z",
-      "statusDuration": 8,
-      "coverage": 45,
-      "speed": 15
+      "lastUpdated": "2026-01-25T18:45:00Z",
+      "statusDuration": 14,
+      "coverage": 65,
+      "speed": 8
     },
     {
       "id": "PLOW-NYC-002",
@@ -17,10 +18,10 @@
       "longitude": -73.9911,
       "route": "Broadway - Downtown",
       "status": "active",
-      "lastUpdated": "2026-01-27T14:22:00Z",
-      "statusDuration": 12,
-      "coverage": 62,
-      "speed": 12
+      "lastUpdated": "2026-01-25T18:42:00Z",
+      "statusDuration": 18,
+      "coverage": 72,
+      "speed": 10
     },
     {
       "id": "PLOW-NYC-003",
@@ -28,19 +29,41 @@
       "longitude": -73.9654,
       "route": "Park Ave - Uptown",
       "status": "active",
-      "lastUpdated": "2026-01-27T14:20:00Z",
-      "statusDuration": 5,
-      "coverage": 38,
-      "speed": 18
+      "lastUpdated": "2026-01-25T18:40:00Z",
+      "statusDuration": 22,
+      "coverage": 58,
+      "speed": 6
     },
     {
       "id": "PLOW-NYC-004",
       "latitude": 40.7489,
       "longitude": -73.9680,
       "route": "Madison Ave - Midtown",
+      "status": "active",
+      "lastUpdated": "2026-01-25T18:38:00Z",
+      "statusDuration": 16,
+      "coverage": 45,
+      "speed": 7
+    },
+    {
+      "id": "PLOW-NYC-005",
+      "latitude": 40.7614,
+      "longitude": -73.9776,
+      "route": "3rd Ave - Upper East",
+      "status": "active",
+      "lastUpdated": "2026-01-25T18:43:00Z",
+      "statusDuration": 12,
+      "coverage": 52,
+      "speed": 9
+    },
+    {
+      "id": "PLOW-NYC-006",
+      "latitude": 40.7505,
+      "longitude": -74.0022,
+      "route": "West Side Hwy - Chelsea",
       "status": "maintenance",
-      "lastUpdated": "2026-01-27T14:15:00Z",
-      "statusDuration": 2,
+      "lastUpdated": "2026-01-25T18:20:00Z",
+      "statusDuration": 3,
       "coverage": 0,
       "speed": 0
     }
@@ -49,94 +72,175 @@
     {
       "corridor": "5th Avenue",
       "condition": "clearing",
-      "snowDepth": 4.2,
-      "visibility": "good",
-      "temperature": 28,
-      "windSpeed": 12,
-      "lastCleared": "2026-01-27T14:20:00Z"
+      "snowDepth": 10.2,
+      "visibility": "moderate",
+      "temperature": 22,
+      "windSpeed": 28,
+      "lastCleared": "2026-01-25T18:45:00Z"
     },
     {
       "corridor": "Broadway",
-      "condition": "cleared",
-      "snowDepth": 0.8,
-      "visibility": "excellent",
-      "temperature": 29,
-      "windSpeed": 8,
-      "lastCleared": "2026-01-27T14:15:00Z"
+      "condition": "clearing",
+      "snowDepth": 9.8,
+      "visibility": "moderate",
+      "temperature": 21,
+      "windSpeed": 32,
+      "lastCleared": "2026-01-25T18:42:00Z"
     },
     {
       "corridor": "Park Avenue",
       "condition": "caution",
-      "snowDepth": 5.6,
-      "visibility": "moderate",
-      "temperature": 26,
-      "windSpeed": 16,
-      "lastCleared": "2026-01-27T13:55:00Z"
+      "snowDepth": 11.6,
+      "visibility": "poor",
+      "temperature": 20,
+      "windSpeed": 35,
+      "lastCleared": "2026-01-25T17:55:00Z"
     },
     {
       "corridor": "Madison Avenue",
       "condition": "impassable",
-      "snowDepth": 7.2,
+      "snowDepth": 12.4,
+      "visibility": "very poor",
+      "temperature": 19,
+      "windSpeed": 38,
+      "lastCleared": "2026-01-25T15:30:00Z"
+    },
+    {
+      "corridor": "3rd Avenue",
+      "condition": "caution",
+      "snowDepth": 11.1,
       "visibility": "poor",
-      "temperature": 24,
-      "windSpeed": 20,
-      "lastCleared": "2026-01-27T12:30:00Z"
+      "temperature": 21,
+      "windSpeed": 30,
+      "lastCleared": "2026-01-25T18:00:00Z"
+    },
+    {
+      "corridor": "West Side Highway",
+      "condition": "impassable",
+      "snowDepth": 12.8,
+      "visibility": "very poor",
+      "temperature": 19,
+      "windSpeed": 42,
+      "lastCleared": "2026-01-25T14:00:00Z"
     }
   ],
   "trafficData": [
     {
       "route": "FDR Drive",
-      "congestionLevel": "moderate",
-      "averageSpeed": 22,
+      "congestionLevel": "severe",
+      "averageSpeed": 8,
       "normalSpeed": 35,
-      "delay": 8
+      "delay": 35
     },
     {
       "route": "West Side Highway",
-      "congestionLevel": "heavy",
-      "averageSpeed": 12,
+      "congestionLevel": "severe",
+      "averageSpeed": 5,
       "normalSpeed": 35,
+      "delay": 45
+    },
+    {
+      "route": "Broadway",
+      "congestionLevel": "heavy",
+      "averageSpeed": 15,
+      "normalSpeed": 30,
+      "delay": 22
+    },
+    {
+      "route": "5th Avenue",
+      "congestionLevel": "heavy",
+      "averageSpeed": 18,
+      "normalSpeed": 30,
       "delay": 18
     },
     {
       "route": "Crosstown 42nd St",
-      "congestionLevel": "light",
-      "averageSpeed": 28,
+      "congestionLevel": "severe",
+      "averageSpeed": 6,
       "normalSpeed": 30,
-      "delay": 2
+      "delay": 40
     }
   ],
   "transitData": {
-    "busDelay": "Average 12-15 minutes",
-    "affectedRoutes": ["M1", "M2", "M5", "M42", "BX15"],
-    "serviceStatus": "Modified Service",
-    "subwayStatus": "Normal"
+    "busDelay": "Average 35-45 minutes",
+    "affectedRoutes": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M42", "BX1", "BX15", "QM1", "QM6"],
+    "serviceStatus": "Severe Service Delays",
+    "subwayStatus": "Some delays - L train suspended",
+    "busesInService": "60% of fleet"
   },
   "weatherSummary": {
-    "condition": "Light snow continuing",
-    "temperature": 27,
-    "windSpeed": 14,
-    "visibility": 0.4,
-    "snowfallRate": 0.5,
-    "accumulation": "4-6 inches expected",
-    "forecast": "Snow continuing through evening, ending by 10 PM"
+    "condition": "Heavy snow continues",
+    "temperature": 20,
+    "windSpeed": 35,
+    "visibility": 0.2,
+    "snowfallRate": 1.2,
+    "accumulation": "12 inches so far",
+    "forecast": "Snow continuing through evening, expected to end by 11 PM. Total accumulation 12-14 inches",
+    "windChill": -8
   },
   "incidents": [
     {
       "id": "INC-001",
       "type": "accident",
       "location": "5th Ave & 42nd St",
-      "severity": "moderate",
-      "impact": "lane closure",
-      "reported": "2026-01-27T14:10:00Z"
+      "severity": "severe",
+      "impact": "2 lanes closed",
+      "reported": "2026-01-25T18:15:00Z"
     },
     {
       "id": "INC-002",
+      "type": "accident",
+      "location": "FDR Drive @ 34th St",
+      "severity": "severe",
+      "impact": "multi-vehicle pileup",
+      "reported": "2026-01-25T17:45:00Z"
+    },
+    {
+      "id": "INC-003",
       "type": "disabled_vehicle",
-      "location": "Broadway & 34th St",
+      "location": "Broadway & 42nd St",
+      "severity": "moderate",
+      "impact": "1 lane blocked",
+      "reported": "2026-01-25T18:30:00Z"
+    },
+    {
+      "id": "INC-004",
+      "type": "disabled_vehicle",
+      "location": "West Side Hwy @ 72nd St",
+      "severity": "moderate",
+      "impact": "shoulder blocked",
+      "reported": "2026-01-25T18:10:00Z"
+    },
+    {
+      "id": "INC-005",
+      "type": "accident",
+      "location": "Crosstown 42nd St & 9th Ave",
+      "severity": "moderate",
+      "impact": "lane closure",
+      "reported": "2026-01-25T18:25:00Z"
+    },
+    {
+      "id": "INC-006",
+      "type": "vehicle_stuck",
+      "location": "Madison Ave & 53rd St",
       "severity": "low",
       "impact": "minor delays",
-      "reported": "2026-01-27T14:18:00Z"
+      "reported": "2026-01-25T18:20:00Z"
     }
-  ]
+  ],
+  "stormStats": {
+    "totalSnowfall": 12.0,
+    "snowfallRate": 1.2,
+    "temperature": 20,
+    "windSpeed": 35,
+    "windGust": 48,
+    "visibility": 0.2,
+    "accidents": 3,
+    "disabledVehicles": 3,
+    "roadsImpassable": 2,
+    "roadsClearing": 2,
+    "roadsCaution": 2,
+    "averageDelay": 32,
+    "estimatedAffectedPopulation": 2500000
+  }
 }
