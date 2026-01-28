@@ -10,88 +10,96 @@ async function initMap() {
     // NYC Center coordinates
     const nycCenter = { lat: 40.7128, lng: -74.0060 };
 
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: nycCenter,
-        styles: [
-            { elementType: "geometry", stylers: [{ color: "#1a202e" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#1a202e" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#a0aec0" }] },
-            {
-                featureType: "administrative.locality",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#a0aec0" }]
-            },
-            {
-                featureType: "poi",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#a0aec0" }]
-            },
-            {
-                featureType: "poi.park",
-                elementType: "geometry",
-                stylers: [{ color: "#2d3748" }]
-            },
-            {
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [{ color: "#38415f" }]
-            },
-            {
-                featureType: "road",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#2d3748" }]
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry",
-                stylers: [{ color: "#4c5481" }]
-            },
-            {
-                featureType: "road.highway",
-                elementType: "geometry.stroke",
-                stylers: [{ color: "#2d3748" }]
-            },
-            {
-                featureType: "road.arterial",
-                elementType: "geometry",
-                stylers: [{ color: "#38415f" }]
-            },
-            {
-                featureType: "water",
-                elementType: "geometry",
-                stylers: [{ color: "#0f1419" }]
+    try {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: nycCenter,
+            styles: [
+                { elementType: "geometry", stylers: [{ color: "#1a202e" }] },
+                { elementType: "labels.text.stroke", stylers: [{ color: "#1a202e" }] },
+                { elementType: "labels.text.fill", stylers: [{ color: "#a0aec0" }] },
+                {
+                    featureType: "administrative.locality",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#a0aec0" }]
+                },
+                {
+                    featureType: "poi",
+                    elementType: "labels.text.fill",
+                    stylers: [{ color: "#a0aec0" }]
+                },
+                {
+                    featureType: "poi.park",
+                    elementType: "geometry",
+                    stylers: [{ color: "#2d3748" }]
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [{ color: "#38415f" }]
+                },
+                {
+                    featureType: "road",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#2d3748" }]
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "geometry",
+                    stylers: [{ color: "#4c5481" }]
+                },
+                {
+                    featureType: "road.highway",
+                    elementType: "geometry.stroke",
+                    stylers: [{ color: "#2d3748" }]
+                },
+                {
+                    featureType: "road.arterial",
+                    elementType: "geometry",
+                    stylers: [{ color: "#38415f" }]
+                },
+                {
+                    featureType: "water",
+                    elementType: "geometry",
+                    stylers: [{ color: "#0f1419" }]
+                }
+            ]
+        });
+
+        console.log('Google Map initialized successfully');
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer({
+            map: map,
+            polylineOptions: {
+                strokeColor: "#0066ff",
+                strokeWeight: 4
             }
-        ]
-    });
+        });
 
-    directionsService = new google.maps.DirectionsService();
-    directionsRenderer = new google.maps.DirectionsRenderer({
-        map: map,
-        polylineOptions: {
-            strokeColor: "#0066ff",
-            strokeWeight: 4
-        }
-    });
+        // Add sample snowplow markers
+        addSnowplowMarkers();
+        addRoadStatusOverlay();
 
-    // Add sample snowplow markers
-    addSnowplowMarkers();
-    addRoadStatusOverlay();
+        // Initialize Gemini Analyzer
+        geminiAnalyzer = new GeminiAnalyzer('AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE');
+        
+        // Load mock data
+        await loadMockData();
+        
+        // Generate initial Gemini analysis
+        generateMapSidebarAnalysis();
 
-    // Initialize Gemini Analyzer
-    geminiAnalyzer = new GeminiAnalyzer('AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE');
-    
-    // Load mock data
-    await loadMockData();
-    
-    // Generate initial Gemini analysis
-    generateMapSidebarAnalysis();
-
-    // Event listeners
-    document.getElementById('showSnowplows').addEventListener('click', toggleSnowplows);
-    document.getElementById('showRoads').addEventListener('click', toggleRoads);
-    document.getElementById('showRoutes').addEventListener('click', toggleRoutes);
-    document.getElementById('planRoute').addEventListener('click', planRoute);
+        // Event listeners
+        document.getElementById('showSnowplows').addEventListener('click', toggleSnowplows);
+        document.getElementById('showRoads').addEventListener('click', toggleRoads);
+        document.getElementById('showRoutes').addEventListener('click', toggleRoutes);
+        document.getElementById('planRoute').addEventListener('click', planRoute);
+        document.getElementById('useCurrentLocation').addEventListener('click', useCurrentLocation);
+    } catch (error) {
+        console.error('Map initialization error:', error);
+        document.getElementById('map').innerHTML = '<p style="color: #a0aec0; padding: 20px;">Map failed to load. Please refresh the page.</p>';
+    }
 }
 
 function addSnowplowMarkers() {
@@ -240,6 +248,65 @@ function planRoute() {
             alert('Could not calculate route: ' + status);
         }
     });
+}
+
+// Use current location as starting point
+function useCurrentLocation() {
+    const btn = document.getElementById('useCurrentLocation');
+    btn.textContent = '📍 Getting...';
+    btn.disabled = true;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                
+                // Use reverse geocoding to get address
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ location: { lat: lat, lng: lng } }, (results, status) => {
+                    if (status === 'OK' && results[0]) {
+                        const address = results[0].formatted_address;
+                        document.getElementById('startLocation').value = address;
+                        btn.innerHTML = '<span>✓</span>';
+                        btn.disabled = false;
+                        
+                        // Center map on current location
+                        map.setCenter({ lat: lat, lng: lng });
+                        
+                        // Add marker at current location
+                        new google.maps.Marker({
+                            position: { lat: lat, lng: lng },
+                            map: map,
+                            title: 'Your Location',
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 12,
+                                fillColor: '#0066ff',
+                                fillOpacity: 1,
+                                strokeColor: '#ffffff',
+                                strokeWeight: 2
+                            }
+                        });
+                    } else {
+                        alert('Could not get address for current location');
+                        btn.innerHTML = '<span>📍</span>';
+                        btn.disabled = false;
+                    }
+                });
+            },
+            (error) => {
+                console.error('Geolocation error:', error);
+                alert('Unable to get your location. Please enable location services.');
+                btn.innerHTML = '<span>📍</span>';
+                btn.disabled = false;
+            }
+        );
+    } else {
+        alert('Geolocation is not supported by your browser');
+        btn.innerHTML = '<span>📍</span>';
+        btn.disabled = false;
+    }
 }
 
 // Initialize map when page loads
