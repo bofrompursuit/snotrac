@@ -97,12 +97,14 @@ async function analyzeCustomRoute() {
         return;
     }
 
-    container.innerHTML = '<div class="loading">Analyzing route conditions...</div>';
+    container.innerHTML = '<div class="loading">Analyzing route conditions for ' + startLocation + ' → ' + endLocation + '...</div>';
     
     try {
+        console.log('Requesting route analysis for:', startLocation, 'to', endLocation);
         const analysis = await geminiAnalyzer.analyzeRouteConditions(mockData, startLocation, endLocation);
         container.innerHTML = `<p>${analysis}</p>`;
     } catch (error) {
+        console.error('Route analysis error:', error);
         container.innerHTML = `<p>Error analyzing route: ${error.message}</p>`;
     }
 }
