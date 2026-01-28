@@ -1,0 +1,292 @@
+/* Dashboard Specific Styles */
+
+:root {
+    --primary-color: #0066ff;
+    --dark-bg: #0a1128;
+    --card-bg: #1a2847;
+    --text-light: #ffffff;
+    --text-muted: #a0aec0;
+    --accent-snow: #e8f4f8;
+    --danger: #ff4444;
+    --warning: #f6ad55;
+    --success: #68d391;
+}
+
+.dashboard-hero {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(232, 244, 248, 0.05));
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.dashboard-header h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #e8f4f8, var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dashboard-header p {
+    font-size: 18px;
+    color: var(--text-muted);
+}
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.insight-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), transparent);
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-light);
+}
+
+.refresh-btn {
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-btn:hover {
+    transform: rotate(180deg);
+}
+
+.card-content {
+    padding: 20px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loading {
+    text-align: center;
+    color: var(--text-muted);
+    animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.card-content p {
+    line-height: 1.7;
+    color: var(--text-light);
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.full-width-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    margin-bottom: 40px;
+}
+
+.route-recommendation-form {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), transparent);
+    border-bottom: 1px solid rgba(0, 102, 255, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.route-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    background-color: rgba(0, 102, 255, 0.05);
+    border: 1px solid rgba(0, 102, 255, 0.2);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.route-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: rgba(0, 102, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+.route-input::placeholder {
+    color: rgba(160, 174, 192, 0.5);
+}
+
+.arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.route-btn {
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.route-btn:hover {
+    background-color: #0052cc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+}
+
+.route-btn:active {
+    transform: translateY(0);
+}
+
+#routeAnalysis {
+    min-height: 250px;
+}
+
+.placeholder-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.data-summary {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(0, 102, 255, 0.2);
+}
+
+.data-summary h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.summary-item {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), transparent);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    text-align: center;
+}
+
+.summary-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.summary-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.summary-value.warning {
+    color: var(--warning);
+}
+
+.summary-value.success {
+    color: var(--success);
+}
+
+.summary-value.danger {
+    color: var(--danger);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .insights-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-header p {
+        font-size: 16px;
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .route-input {
+        width: 100%;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .route-btn {
+        width: 100%;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

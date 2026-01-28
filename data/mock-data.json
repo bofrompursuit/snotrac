@@ -1,0 +1,142 @@
+{
+  "snowplows": [
+    {
+      "id": "PLOW-NYC-001",
+      "latitude": 40.7580,
+      "longitude": -73.9855,
+      "route": "5th Ave - Central Park",
+      "status": "active",
+      "lastUpdated": "2026-01-27T14:23:00Z",
+      "statusDuration": 8,
+      "coverage": 45,
+      "speed": 15
+    },
+    {
+      "id": "PLOW-NYC-002",
+      "latitude": 40.7360,
+      "longitude": -73.9911,
+      "route": "Broadway - Downtown",
+      "status": "active",
+      "lastUpdated": "2026-01-27T14:22:00Z",
+      "statusDuration": 12,
+      "coverage": 62,
+      "speed": 12
+    },
+    {
+      "id": "PLOW-NYC-003",
+      "latitude": 40.7829,
+      "longitude": -73.9654,
+      "route": "Park Ave - Uptown",
+      "status": "active",
+      "lastUpdated": "2026-01-27T14:20:00Z",
+      "statusDuration": 5,
+      "coverage": 38,
+      "speed": 18
+    },
+    {
+      "id": "PLOW-NYC-004",
+      "latitude": 40.7489,
+      "longitude": -73.9680,
+      "route": "Madison Ave - Midtown",
+      "status": "maintenance",
+      "lastUpdated": "2026-01-27T14:15:00Z",
+      "statusDuration": 2,
+      "coverage": 0,
+      "speed": 0
+    }
+  ],
+  "roadConditions": [
+    {
+      "corridor": "5th Avenue",
+      "condition": "clearing",
+      "snowDepth": 4.2,
+      "visibility": "good",
+      "temperature": 28,
+      "windSpeed": 12,
+      "lastCleared": "2026-01-27T14:20:00Z"
+    },
+    {
+      "corridor": "Broadway",
+      "condition": "cleared",
+      "snowDepth": 0.8,
+      "visibility": "excellent",
+      "temperature": 29,
+      "windSpeed": 8,
+      "lastCleared": "2026-01-27T14:15:00Z"
+    },
+    {
+      "corridor": "Park Avenue",
+      "condition": "caution",
+      "snowDepth": 5.6,
+      "visibility": "moderate",
+      "temperature": 26,
+      "windSpeed": 16,
+      "lastCleared": "2026-01-27T13:55:00Z"
+    },
+    {
+      "corridor": "Madison Avenue",
+      "condition": "impassable",
+      "snowDepth": 7.2,
+      "visibility": "poor",
+      "temperature": 24,
+      "windSpeed": 20,
+      "lastCleared": "2026-01-27T12:30:00Z"
+    }
+  ],
+  "trafficData": [
+    {
+      "route": "FDR Drive",
+      "congestionLevel": "moderate",
+      "averageSpeed": 22,
+      "normalSpeed": 35,
+      "delay": 8
+    },
+    {
+      "route": "West Side Highway",
+      "congestionLevel": "heavy",
+      "averageSpeed": 12,
+      "normalSpeed": 35,
+      "delay": 18
+    },
+    {
+      "route": "Crosstown 42nd St",
+      "congestionLevel": "light",
+      "averageSpeed": 28,
+      "normalSpeed": 30,
+      "delay": 2
+    }
+  ],
+  "transitData": {
+    "busDelay": "Average 12-15 minutes",
+    "affectedRoutes": ["M1", "M2", "M5", "M42", "BX15"],
+    "serviceStatus": "Modified Service",
+    "subwayStatus": "Normal"
+  },
+  "weatherSummary": {
+    "condition": "Light snow continuing",
+    "temperature": 27,
+    "windSpeed": 14,
+    "visibility": 0.4,
+    "snowfallRate": 0.5,
+    "accumulation": "4-6 inches expected",
+    "forecast": "Snow continuing through evening, ending by 10 PM"
+  },
+  "incidents": [
+    {
+      "id": "INC-001",
+      "type": "accident",
+      "location": "5th Ave & 42nd St",
+      "severity": "moderate",
+      "impact": "lane closure",
+      "reported": "2026-01-27T14:10:00Z"
+    },
+    {
+      "id": "INC-002",
+      "type": "disabled_vehicle",
+      "location": "Broadway & 34th St",
+      "severity": "low",
+      "impact": "minor delays",
+      "reported": "2026-01-27T14:18:00Z"
+    }
+  ]
+}

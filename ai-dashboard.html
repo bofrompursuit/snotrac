@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNOTRAC - AI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">SNOTRAC</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="map.html">Live Map</a></li>
+                <li><a href="ai-dashboard.html">AI Dashboard</a></li>
+                <li><a href="index.html#cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard-hero">
+        <div class="dashboard-header">
+            <h1>🤖 AI-Powered Snow Mobility Insights</h1>
+            <p>Real-time analysis of NYC snowstorm conditions powered by Google Gemini</p>
+        </div>
+    </section>
+
+    <div class="dashboard-container">
+        <div class="insights-grid">
+            <div class="insight-card">
+                <div class="card-header">
+                    <h2>📊 Snowplow Status Analysis</h2>
+                    <span class="refresh-btn" onclick="refreshAnalysis('snowplow')">🔄</span>
+                </div>
+                <div class="card-content" id="snowplowAnalysis">
+                    <div class="loading">Analyzing snowplow data...</div>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <div class="card-header">
+                    <h2>⚠️ Safety Insights</h2>
+                    <span class="refresh-btn" onclick="refreshAnalysis('safety')">🔄</span>
+                </div>
+                <div class="card-content" id="safetyAnalysis">
+                    <div class="loading">Analyzing safety conditions...</div>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <div class="card-header">
+                    <h2>🚗 Traffic Predictions</h2>
+                    <span class="refresh-btn" onclick="refreshAnalysis('traffic')">🔄</span>
+                </div>
+                <div class="card-content" id="trafficAnalysis">
+                    <div class="loading">Predicting traffic patterns...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-width-card">
+            <div class="card-header">
+                <h2>📍 Route Recommendation Engine</h2>
+                <span class="refresh-btn" onclick="refreshAnalysis('route')">🔄</span>
+            </div>
+            <div class="route-recommendation-form">
+                <div class="form-row">
+                    <input type="text" id="routeStart" placeholder="Starting Location" class="route-input">
+                    <span class="arrow">→</span>
+                    <input type="text" id="routeEnd" placeholder="Destination" class="route-input">
+                    <button class="route-btn" onclick="analyzeCustomRoute()">Get Route Insights</button>
+                </div>
+            </div>
+            <div class="card-content" id="routeAnalysis">
+                <p class="placeholder-text">Enter a route to get AI-powered recommendations</p>
+            </div>
+        </div>
+
+        <div class="data-summary">
+            <h2>📈 Current Conditions Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Active Snowplows</div>
+                    <div class="summary-value" id="activePlows">3</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Routes Cleared</div>
+                    <div class="summary-value" id="routesCleared">40%</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Transit Delay</div>
+                    <div class="summary-value" id="transitDelay">12-15 min</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Safety Level</div>
+                    <div class="summary-value warning" id="safetyLevel">Caution</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SNOTRAC</h4>
+                    <p>Real-time snow mobility intelligence for NYC</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="map.html">Live Map</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>info@snotrac.app</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SNOTRAC. All rights reserved. Powered by Google Gemini AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="gemini-api.js"></script>
+    <script src="dashboard-script.js"></script>
+</body>
+</html>

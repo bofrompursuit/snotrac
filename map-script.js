@@ -3,8 +3,10 @@ let map;
 let directionsService;
 let directionsRenderer;
 let snowplowMarkers = [];
+let geminiAnalyzer;
+let mockData;
 
-function initMap() {
+async function initMap() {
     // NYC Center coordinates
     const nycCenter = { lat: 40.7128, lng: -74.0060 };
 
@@ -75,6 +77,15 @@ function initMap() {
     // Add sample snowplow markers
     addSnowplowMarkers();
     addRoadStatusOverlay();
+
+    // Initialize Gemini Analyzer
+    geminiAnalyzer = new GeminiAnalyzer('AIzaSyCoAC4mL8IplZfdBMD7Z-E2U-35jA2EAXE');
+    
+    // Load mock data
+    await loadMockData();
+    
+    // Generate initial Gemini analysis
+    generateMapSidebarAnalysis();
 
     // Event listeners
     document.getElementById('showSnowplows').addEventListener('click', toggleSnowplows);
@@ -214,6 +225,9 @@ function planRoute() {
             document.getElementById('routeDistance').textContent = leg.distance.text;
             document.getElementById('routeTime').textContent = leg.duration.text;
             
+            // Get Gemini analysis for this route
+            generateRouteAnalysis(startLocation, endLocation);
+            
             // Calculate risk level (in real app, would check snowplow data)
             const riskLevel = Math.random() > 0.5 ? 'Low' : 'Medium';
             const riskElement = document.getElementById('riskLevel');
@@ -230,3 +244,70 @@ function planRoute() {
 
 // Initialize map when page loads
 window.addEventListener('load', initMap);
+
+// Load mock data
+async function loadMockData() {
+    try {
+        const response = await fetch('data/mock-data.json');
+        mockData = await response.json();
+    } catch (error) {
+        console.error('Error loading mock data:', error);
+    }
+}
+
+// Generate sidebar analysis with Gemini
+async function generateMapSidebarAnalysis() {
+    if (!mockData || !geminiAnalyzer) return;
+
+    const analysisContainer = document.querySelector('.sidebar-section:first-of-type');
+    if (!analysisContainer) return;
+
+    // Add analysis section
+    const analysisDiv = document.createElement('div');
+    analysisDiv.className = 'sidebar-section gemini-analysis';
+    analysisDiv.innerHTML = `
+        <h2>🤖 AI Analysis</h2>
+        <div class="analysis-loading">
+            <p>Analyzing conditions...</p>
+        </div>
+    `;
+    analysisContainer.parentNode.insertBefore(analysisDiv, analysisContainer.nextSibling);
+
+    // Get Gemini analysis
+    const analysis = await geminiAnalyzer.analyzeSnowplowData(mockData);
+    
+    analysisDiv.innerHTML = `
+        <h2>🤖 AI Analysis</h2>
+        <div class="analysis-content">
+            <p>${analysis}</p>
+        </div>
+    `;
+}
+
+// Generate route-specific analysis
+async function generateRouteAnalysis(startLocation, endLocation) {
+    if (!mockData || !geminiAnalyzer) return;
+
+    const routeResults = document.getElementById('routeResults');
+    
+    // Add analysis section
+    const analysisDiv = document.createElement('div');
+    analysisDiv.className = 'route-analysis-section';
+    analysisDiv.innerHTML = `
+        <h3>🤖 AI Route Analysis</h3>
+        <div class="analysis-loading">
+            <p>Analyzing route conditions...</p>
+        </div>
+    `;
+    routeResults.appendChild(analysisDiv);
+
+    // Get Gemini route analysis
+    const analysis = await geminiAnalyzer.analyzeRouteConditions(mockData, startLocation, endLocation);
+    
+    analysisDiv.innerHTML = `
+        <h3>🤖 AI Route Analysis</h3>
+        <div class="route-analysis-content">
+            <p>${analysis}</p>
+        </div>
+    `;
+}

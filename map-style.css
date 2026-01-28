@@ -212,6 +212,71 @@
     background-color: #fc8181;
 }
 
+/* Gemini Analysis Styles */
+.gemini-analysis {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(232, 244, 248, 0.05));
+    border-left: 4px solid var(--primary-color) !important;
+}
+
+.analysis-loading,
+.analysis-content {
+    background-color: rgba(0, 102, 255, 0.1);
+    padding: 12px;
+    border-radius: 6px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.analysis-content p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-light);
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.analysis-loading p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 13px;
+    animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.route-analysis-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+}
+
+.route-analysis-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-light);
+}
+
+.route-analysis-content {
+    background-color: rgba(0, 102, 255, 0.1);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.route-analysis-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-light);
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
 /* Route Planner Section */
 .route-planner {
     padding: 60px 20px;
@@ -338,8 +403,6 @@
     font-size: 14px;
     margin: 0;
 }
-
-/* Responsive */
 @media (max-width: 1024px) {
     .map-container {
         grid-template-columns: 1fr;
