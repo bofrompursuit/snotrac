@@ -126,7 +126,7 @@ async function analyzeCustomRoute() {
     }
 
     if (!mockData || !geminiAnalyzer) {
-        container.innerHTML = '<p style="color: var(--danger);">Unable to load data</p>';
+        container.innerHTML = '<div class="loading">Unable to load data</div>';
         return;
     }
 
@@ -134,6 +134,36 @@ async function analyzeCustomRoute() {
     
     try {
         console.log('Analyzing route:', startLocation, 'to', endLocation);
+        
+        // Check for demo route (Central Park -> Empire State Building)
+        if ((startLocation.toLowerCase().includes('central park') || startLocation.toLowerCase().includes('central')) && 
+            (endLocation.toLowerCase().includes('empire') || endLocation.toLowerCase().includes('state'))) {
+            
+            console.log('Demo route detected - showing mock result');
+            const demoResult = `Route Safety Assessment: MODERATE
+
+Travel Recommendation:
+This 2.1-mile route is challenging but passable with caution. Expected delays of 15-20 minutes.
+
+Best Travel Mode:
+TRANSIT RECOMMENDED - Bus M1 or M5 from Central Park South to 34th Street is your safest option given current conditions. Walking is NOT recommended due to 12" snow accumulation.
+
+Specific Travel Tips:
+1. Avoid 5th Avenue - still heavily congested with delays up to 25 minutes
+2. Use Broadway corridor - recently cleared by snowplows (9.8" snow, moderate conditions)
+3. Bus Service: M1/M5 experiencing 20-25 min delays but moving steadily
+4. If driving: Use side streets around Madison Ave to avoid major congestion
+5. Allow 25-35 minutes for travel instead of typical 10-15 minutes
+
+Estimated Delay Impact: +15-20 minutes added to normal travel time
+
+Safety Note: Wind gusts up to 48 mph on open areas near Empire State Building`;
+            
+            container.innerHTML = `<p>${demoResult}</p>`;
+            return;
+        }
+        
+        // For other routes, use regular analysis
         const analysis = await geminiAnalyzer.analyzeRouteConditions(mockData, startLocation, endLocation);
         
         if (analysis && analysis.length > 0) {
