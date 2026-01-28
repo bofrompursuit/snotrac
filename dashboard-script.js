@@ -37,9 +37,14 @@ async function generateSnowplowAnalysis() {
     
     try {
         const analysis = await geminiAnalyzer.analyzeSnowplowData(mockData);
-        container.innerHTML = `<p>${analysis}</p>`;
+        if (analysis && analysis.length > 0) {
+            container.innerHTML = `<p>${analysis}</p>`;
+        } else {
+            container.innerHTML = '<p>Unable to generate analysis.</p>';
+        }
     } catch (error) {
-        container.innerHTML = `<p>Error generating analysis: ${error.message}</p>`;
+        console.error('Snowplow analysis error:', error);
+        container.innerHTML = `<p>${geminiAnalyzer.getFallbackAnalysis()}</p>`;
     }
 }
 
@@ -56,9 +61,14 @@ async function generateSafetyInsights() {
     
     try {
         const analysis = await geminiAnalyzer.generateSafetyInsights(mockData);
-        container.innerHTML = `<p>${analysis}</p>`;
+        if (analysis && analysis.length > 0) {
+            container.innerHTML = `<p>${analysis}</p>`;
+        } else {
+            container.innerHTML = `<p>${geminiAnalyzer.getFallbackSafetyAnalysis()}</p>`;
+        }
     } catch (error) {
-        container.innerHTML = `<p>Error generating analysis: ${error.message}</p>`;
+        console.error('Safety analysis error:', error);
+        container.innerHTML = `<p>${geminiAnalyzer.getFallbackSafetyAnalysis()}</p>`;
     }
 }
 
@@ -75,9 +85,14 @@ async function generateTrafficPrediction() {
     
     try {
         const analysis = await geminiAnalyzer.generateTrafficPrediction(mockData);
-        container.innerHTML = `<p>${analysis}</p>`;
+        if (analysis && analysis.length > 0) {
+            container.innerHTML = `<p>${analysis}</p>`;
+        } else {
+            container.innerHTML = `<p>${geminiAnalyzer.getFallbackTrafficAnalysis()}</p>`;
+        }
     } catch (error) {
-        container.innerHTML = `<p>Error generating prediction: ${error.message}</p>`;
+        console.error('Traffic prediction error:', error);
+        container.innerHTML = `<p>${geminiAnalyzer.getFallbackTrafficAnalysis()}</p>`;
     }
 }
 
@@ -93,19 +108,26 @@ async function analyzeCustomRoute() {
     }
 
     if (!mockData || !geminiAnalyzer) {
-        container.innerHTML = '<div class="loading">Unable to load data</div>';
+        container.innerHTML = '<p style="color: var(--danger);">Unable to load data</p>';
         return;
     }
 
-    container.innerHTML = '<div class="loading">Analyzing route conditions for ' + startLocation + ' → ' + endLocation + '...</div>';
+    container.innerHTML = '<div class="loading">Analyzing route: ' + startLocation + ' → ' + endLocation + '</div>';
     
     try {
-        console.log('Requesting route analysis for:', startLocation, 'to', endLocation);
+        console.log('Analyzing route:', startLocation, 'to', endLocation);
         const analysis = await geminiAnalyzer.analyzeRouteConditions(mockData, startLocation, endLocation);
-        container.innerHTML = `<p>${analysis}</p>`;
+        
+        if (analysis && analysis.length > 0) {
+            console.log('Route analysis received, length:', analysis.length);
+            container.innerHTML = `<p>${analysis}</p>`;
+        } else {
+            console.log('No analysis result, using fallback');
+            container.innerHTML = `<p>${geminiAnalyzer.getFallbackRouteAnalysis()}</p>`;
+        }
     } catch (error) {
-        console.error('Route analysis error:', error);
-        container.innerHTML = `<p>Error analyzing route: ${error.message}</p>`;
+        console.error('Route analysis exception:', error);
+        container.innerHTML = `<p>${geminiAnalyzer.getFallbackRouteAnalysis()}</p>`;
     }
 }
 

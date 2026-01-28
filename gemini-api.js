@@ -11,25 +11,25 @@ class GeminiAnalyzer {
     async analyzeSnowplowData(mockData) {
         const prompt = this.buildSnowplowAnalysisPrompt(mockData);
         const result = await this.callGeminiAPI(prompt);
-        return result || this.getFallbackAnalysis();
+        return result && result.length > 0 ? result : this.getFallbackAnalysis();
     }
 
     async analyzeRouteConditions(mockData, startLocation, endLocation) {
         const prompt = this.buildRouteAnalysisPrompt(mockData, startLocation, endLocation);
         const result = await this.callGeminiAPI(prompt);
-        return result || this.getFallbackRouteAnalysis();
+        return result && result.length > 0 ? result : this.getFallbackRouteAnalysis();
     }
 
     async generateTrafficPrediction(mockData) {
         const prompt = this.buildTrafficPredictionPrompt(mockData);
         const result = await this.callGeminiAPI(prompt);
-        return result || this.getFallbackTrafficAnalysis();
+        return result && result.length > 0 ? result : this.getFallbackTrafficAnalysis();
     }
 
     async generateSafetyInsights(mockData) {
         const prompt = this.buildSafetyInsightsPrompt(mockData);
         const result = await this.callGeminiAPI(prompt);
-        return result || this.getFallbackSafetyAnalysis();
+        return result && result.length > 0 ? result : this.getFallbackSafetyAnalysis();
     }
 
     buildSnowplowAnalysisPrompt(mockData) {
@@ -99,6 +99,8 @@ Keep response under 120 words, practical and clear.`;
 
     async callGeminiAPI(prompt) {
         try {
+            console.log('Calling Gemini API with prompt length:', prompt.length);
+            
             const response = await fetch(`${this.apiUrl}?key=${this.apiKey}`, {
                 method: 'POST',
                 headers: {
@@ -113,27 +115,30 @@ Keep response under 120 words, practical and clear.`;
                 })
             });
 
-            console.log('API Response Status:', response.status);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('API Error Response:', errorData);
-                throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-            }
+            console.log('Gemini API Response Status:', response.status);
 
             const data = await response.json();
-            console.log('API Response Data:', data);
-            
-            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
-            } else if (data.error) {
-                throw new Error(`API Error: ${data.error.message}`);
+            console.log('Gemini API Response:', data);
+
+            if (!response.ok) {
+                console.error('API Error:', data);
+                throw new Error(`API Error: ${response.status}`);
             }
-            
-            throw new Error('Unexpected API response format');
+
+            if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+                const result = data.candidates[0].content.parts[0].text;
+                console.log('Gemini API Success - Result length:', result.length);
+                return result;
+            } else if (data.error) {
+                console.error('API Error Message:', data.error.message);
+                throw new Error(data.error.message);
+            } else {
+                console.error('Unexpected response format:', data);
+                throw new Error('Invalid response format');
+            }
         } catch (error) {
-            console.error('Gemini API Error:', error);
-            return this.getFallbackAnalysis();
+            console.error('Gemini API Exception:', error.message);
+            return null;
         }
     }
 
